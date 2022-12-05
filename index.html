@@ -4,25 +4,30 @@
   type="text/javascript">
 </script>
 <script>
-  import { datadogRum } from '@datadog/browser-rum';
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
+  DD_RUM.onReady(function() {
+    DD_RUM.init({
+      clientToken: 'pub65276cd559115af3f556eb1a94257e57',
+      applicationId: 'fbcbc4f2-45c2-4c02-8c3c-81b84b2a7a87',
+      site: 'datadoghq.com',
+      service: 'sampleapp',
+      
+      // Specify a version number to identify the deployed version of your application in Datadog 
+      // version: '1.0.0',
+      sampleRate: 100,
+      sessionReplaySampleRate: 20,
+      trackInteractions: true,
+      trackResources: true,
+      trackLongTasks: true,
+      defaultPrivacyLevel: 'mask-user-input',
+    });
 
-datadogRum.init({
-    applicationId: 'fbcbc4f2-45c2-4c02-8c3c-81b84b2a7a87',
-    clientToken: 'pub65276cd559115af3f556eb1a94257e57',
-    site: 'datadoghq.com',
-    service:'sampleapp',
-    
-    // Specify a version number to identify the deployed version of your application in Datadog 
-    // version: '1.0.0',
-    sampleRate: 100,
-    sessionReplaySampleRate: 100,
-    trackInteractions: true,
-    trackResources: true,
-    trackLongTasks: true,
-    defaultPrivacyLevel:'mask-user-input'
-});
-    
-datadogRum.startSessionReplayRecording();
+    DD_RUM.startSessionReplayRecording();
+  })
 </script>
 <html>
 <h1 >You did it!</h1>
